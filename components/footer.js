@@ -155,7 +155,7 @@ class CustomFooter extends HTMLElement {
                             </div>
                             <div class="text-sm">
                                 <p>&copy; ${new Date().getFullYear()} AAU Store, Inc. All rights reserved.</p>
-                                <p class="text-xs mt-1">Addis Ababa University - Student Tech Marketplace</p>
+                                <p class="text-xs mt-1">AAU- Student Tech Marketplace</p>
                             </div>
                         </div>
                     </div>
