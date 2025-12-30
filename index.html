@@ -1,245 +1,309 @@
-[file name]: index.html
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AAU Store - Your Campus Tech Marketplace</title>
-    <link rel="stylesheet" href="style.css">
+    <title>AAU Store - Campus Tech Marketplace</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
-    <script src="components/navbar.js"></script>
-    <script src="components/footer.js"></script>
-    <script src="components/product-card.js"></script>
+    <style>
+        html { scroll-behavior: smooth; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .fade-in { animation: fadeIn 0.6s ease-out; }
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+        .product-card {
+            transition: all 0.3s ease;
+        }
+    </style>
 </head>
 <body class="bg-gray-50">
-    <custom-navbar></custom-navbar>
-    
+    <!-- Navigation -->
+    <nav class="bg-gradient-to-r from-blue-600 to-purple-700 text-white py-4 px-6 fixed w-full top-0 z-50 shadow-lg">
+        <div class="container mx-auto flex justify-between items-center">
+            <div class="text-2xl font-bold flex items-center">
+                <i data-feather="shopping-bag" class="mr-2"></i>
+                AAU Store
+            </div>
+            <div class="hidden md:flex items-center space-x-6">
+                <a href="#" class="hover:text-yellow-300 transition-colors">Home</a>
+                <a href="#" class="hover:text-yellow-300 transition-colors">Products</a>
+                <a href="#" class="hover:text-yellow-300 transition-colors">Deals</a>
+                <a href="#" class="hover:text-yellow-300 transition-colors">Student Discount</a>
+                <a href="#" class="hover:text-yellow-300 transition-colors">Campus Pickup</a>
+            </div>
+            <div class="flex items-center space-x-4">
+                <button class="p-2 hover:bg-blue-700 rounded-lg">
+                    <i data-feather="user"></i>
+                </button>
+                <button class="bg-yellow-400 text-gray-900 px-4 py-2 rounded-lg font-bold hover:bg-yellow-500 flex items-center">
+                    <i data-feather="shopping-cart" class="mr-2"></i>
+                    Cart <span class="ml-1 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">3</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
     <!-- Hero Section -->
-    <section class="bg-gradient-to-r from-blue-600 to-purple-700 text-white py-16">
-        <div class="container mx-auto px-4 text-center">
-            <h1 class="text-4xl md:text-5xl font-bold mb-4">Welcome to AAU Store</h1>
-            <p class="text-xl mb-8">Your campus tech marketplace with student-exclusive deals</p>
+    <section class="pt-32 pb-20 px-4 bg-gradient-to-r from-blue-500 to-purple-600 text-white">
+        <div class="container mx-auto text-center fade-in">
+            <h1 class="text-4xl md:text-5xl font-bold mb-6">Welcome to AAU Store</h1>
+            <p class="text-xl mb-8 max-w-2xl mx-auto">Your campus tech marketplace with student-exclusive deals</p>
             <div class="max-w-2xl mx-auto">
-                <form class="flex">
-                    <input type="text" placeholder="Search for laptops, phones, accessories..." 
-                           class="flex-grow px-6 py-3 text-gray-900 rounded-l-lg focus:outline-none focus:ring-4 focus:ring-blue-300">
-                    <button type="submit" class="bg-yellow-400 text-gray-900 px-8 py-3 rounded-r-lg hover:bg-yellow-500 font-semibold flex items-center">
+                <div class="flex">
+                    <input type="text" 
+                           placeholder="Search for laptops, phones, accessories..." 
+                           class="flex-grow px-6 py-4 rounded-l-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-yellow-400">
+                    <button class="bg-yellow-400 text-gray-900 px-8 py-4 rounded-r-lg font-bold hover:bg-yellow-500 flex items-center">
                         <i data-feather="search" class="mr-2"></i> Search
                     </button>
-                </form>
+                </div>
             </div>
         </div>
     </section>
 
-    <main class="container mx-auto px-4 py-8">
-        <!-- Categories -->
-        <section class="mb-12">
-            <h2 class="text-2xl font-bold text-gray-800 mb-6">Shop by Category</h2>
-            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4">
-                <a href="#" class="bg-white p-4 rounded-lg shadow-sm hover:shadow-md transition-shadow text-center">
-                    <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-2">
-                        <i data-feather="smartphone" class="text-blue-600"></i>
+    <!-- Categories -->
+    <section class="py-12 px-4 fade-in">
+        <div class="container mx-auto">
+            <h2 class="text-3xl font-bold text-center mb-10">Shop by Category</h2>
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-6">
+                <a href="#" class="bg-white rounded-xl p-6 text-center shadow-md hover:shadow-xl transition-shadow">
+                    <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i data-feather="smartphone" class="text-blue-600 w-8 h-8"></i>
                     </div>
-                    <span class="font-medium">Phones</span>
+                    <span class="font-bold text-gray-800">Phones</span>
                 </a>
-                <a href="#" class="bg-white p-4 rounded-lg shadow-sm hover:shadow-md transition-shadow text-center">
-                    <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-2">
-                        <i data-feather="laptop" class="text-purple-600"></i>
+                <a href="#" class="bg-white rounded-xl p-6 text-center shadow-md hover:shadow-xl transition-shadow">
+                    <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i data-feather="laptop" class="text-purple-600 w-8 h-8"></i>
                     </div>
-                    <span class="font-medium">Laptops</span>
+                    <span class="font-bold text-gray-800">Laptops</span>
                 </a>
-                <a href="#" class="bg-white p-4 rounded-lg shadow-sm hover:shadow-md transition-shadow text-center">
-                    <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-2">
-                        <i data-feather="headphones" class="text-green-600"></i>
+                <a href="#" class="bg-white rounded-xl p-6 text-center shadow-md hover:shadow-xl transition-shadow">
+                    <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i data-feather="headphones" class="text-green-600 w-8 h-8"></i>
                     </div>
-                    <span class="font-medium">Audio</span>
+                    <span class="font-bold text-gray-800">Audio</span>
                 </a>
-                <a href="#" class="bg-white p-4 rounded-lg shadow-sm hover:shadow-md transition-shadow text-center">
-                    <div class="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-2">
-                        <i data-feather="tablet" class="text-red-600"></i>
+                <a href="#" class="bg-white rounded-xl p-6 text-center shadow-md hover:shadow-xl transition-shadow">
+                    <div class="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i data-feather="tablet" class="text-red-600 w-8 h-8"></i>
                     </div>
-                    <span class="font-medium">Tablets</span>
+                    <span class="font-bold text-gray-800">Tablets</span>
                 </a>
-                <a href="#" class="bg-white p-4 rounded-lg shadow-sm hover:shadow-md transition-shadow text-center">
-                    <div class="w-12 h-12 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-2">
-                        <i data-feather="watch" class="text-yellow-600"></i>
+                <a href="#" class="bg-white rounded-xl p-6 text-center shadow-md hover:shadow-xl transition-shadow">
+                    <div class="w-16 h-16 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i data-feather="watch" class="text-yellow-600 w-8 h-8"></i>
                     </div>
-                    <span class="font-medium">Wearables</span>
+                    <span class="font-bold text-gray-800">Wearables</span>
                 </a>
-                <a href="#" class="bg-white p-4 rounded-lg shadow-sm hover:shadow-md transition-shadow text-center">
-                    <div class="w-12 h-12 bg-indigo-100 rounded-full flex items-center justify-center mx-auto mb-2">
-                        <i data-feather="cpu" class="text-indigo-600"></i>
+                <a href="#" class="bg-white rounded-xl p-6 text-center shadow-md hover:shadow-xl transition-shadow">
+                    <div class="w-16 h-16 bg-indigo-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i data-feather="cpu" class="text-indigo-600 w-8 h-8"></i>
                     </div>
-                    <span class="font-medium">Components</span>
+                    <span class="font-bold text-gray-800">Components</span>
                 </a>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- Featured Deals -->
-        <section class="mb-12">
-            <div class="flex justify-between items-center mb-6">
-                <h2 class="text-2xl font-bold text-gray-800">Today's Best Deals 🎯</h2>
-                <a href="#" class="text-blue-600 hover:text-blue-800 font-medium flex items-center">
-                    View all deals
-                    <i data-feather="arrow-right" class="ml-1 w-4 h-4"></i>
+    <!-- Today's Best Deals -->
+    <section class="py-12 px-4 bg-gray-100 fade-in">
+        <div class="container mx-auto">
+            <div class="flex justify-between items-center mb-8">
+                <h2 class="text-3xl font-bold text-gray-800">Today's Best Deals 🎯</h2>
+                <a href="#" class="text-blue-600 hover:text-blue-800 font-bold flex items-center">
+                    View all deals <i data-feather="arrow-right" class="ml-2"></i>
                 </a>
             </div>
             
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
-                <custom-product-card 
-                    image="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=400"
-                    title="iPhone 14 Pro Max"
-                    price="1099.99"
-                    original-price="1199.99"
-                    rating="4.8"
-                    deal="true">
-                </custom-product-card>
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
+                <!-- Product 1 -->
+                <div class="product-card bg-white rounded-xl overflow-hidden shadow-lg">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=400&h=300&fit=crop" 
+                             alt="iPhone 14 Pro" class="w-full h-48 object-cover">
+                        <span class="absolute top-3 left-3 bg-red-600 text-white px-3 py-1 rounded-full text-sm font-bold">
+                            SALE
+                        </span>
+                    </div>
+                    <div class="p-5">
+                        <h3 class="font-bold text-lg mb-2">iPhone 14 Pro Max</h3>
+                        <div class="flex items-center mb-3">
+                            <div class="text-yellow-400 flex">
+                                ★★★★★
+                            </div>
+                            <span class="text-gray-600 text-sm ml-2">4.8 (128 reviews)</span>
+                        </div>
+                        <div class="flex items-center mb-4">
+                            <span class="text-2xl font-bold text-gray-900">$1,099.99</span>
+                            <span class="text-gray-500 line-through ml-2">$1,199.99</span>
+                            <span class="bg-green-100 text-green-800 text-xs font-bold px-2 py-1 rounded ml-2">
+                                Save $100
+                            </span>
+                        </div>
+                        <button class="w-full bg-blue-600 text-white py-3 rounded-lg font-bold hover:bg-blue-700 transition-colors">
+                            Add to Cart
+                        </button>
+                    </div>
+                </div>
                 
-                <custom-product-card 
-                    image="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=400"
-                    title="MacBook Air M2"
-                    price="999.99"
-                    original-price="1199.99"
-                    rating="4.9"
-                    deal="true">
-                </custom-product-card>
+                <!-- Product 2 -->
+                <div class="product-card bg-white rounded-xl overflow-hidden shadow-lg">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=400&h=300&fit=crop" 
+                             alt="MacBook Air" class="w-full h-48 object-cover">
+                        <span class="absolute top-3 left-3 bg-red-600 text-white px-3 py-1 rounded-full text-sm font-bold">
+                            DEAL
+                        </span>
+                    </div>
+                    <div class="p-5">
+                        <h3 class="font-bold text-lg mb-2">MacBook Air M2</h3>
+                        <div class="flex items-center mb-3">
+                            <div class="text-yellow-400 flex">
+                                ★★★★★
+                            </div>
+                            <span class="text-gray-600 text-sm ml-2">4.9 (256 reviews)</span>
+                        </div>
+                        <div class="flex items-center mb-4">
+                            <span class="text-2xl font-bold text-gray-900">$999.99</span>
+                            <span class="text-gray-500 line-through ml-2">$1,199.99</span>
+                            <span class="bg-green-100 text-green-800 text-xs font-bold px-2 py-1 rounded ml-2">
+                                Save $200
+                            </span>
+                        </div>
+                        <button class="w-full bg-blue-600 text-white py-3 rounded-lg font-bold hover:bg-blue-700 transition-colors">
+                            Add to Cart
+                        </button>
+                    </div>
+                </div>
                 
-                <custom-product-card 
-                    image="https://images.unsplash.com/photo-1600003263720-95b45a4035d5?w-400"
-                    title="Sony WH-1000XM5"
-                    price="329.99"
-                    original-price="399.99"
-                    rating="4.7">
-                </custom-product-card>
+                <!-- Product 3 -->
+                <div class="product-card bg-white rounded-xl overflow-hidden shadow-lg">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400&h=300&fit=crop" 
+                             alt="Headphones" class="w-full h-48 object-cover">
+                    </div>
+                    <div class="p-5">
+                        <h3 class="font-bold text-lg mb-2">Sony WH-1000XM5</h3>
+                        <div class="flex items-center mb-3">
+                            <div class="text-yellow-400 flex">
+                                ★★★★★
+                            </div>
+                            <span class="text-gray-600 text-sm ml-2">4.7 (89 reviews)</span>
+                        </div>
+                        <div class="flex items-center mb-4">
+                            <span class="text-2xl font-bold text-gray-900">$329.99</span>
+                            <span class="text-gray-500 line-through ml-2">$399.99</span>
+                        </div>
+                        <button class="w-full bg-blue-600 text-white py-3 rounded-lg font-bold hover:bg-blue-700 transition-colors">
+                            Add to Cart
+                        </button>
+                    </div>
+                </div>
                 
-                <custom-product-card 
-                    image="https://images.unsplash.com/photo-1546868871-7041f2a55e12?w=400"
-                    title="Apple Watch Series 8"
-                    price="399.99"
-                    original-price="429.99"
-                    rating="4.6">
-                </custom-product-card>
-                
-                <custom-product-card 
-                    image="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=400"
-                    title="Samsung Galaxy S23"
-                    price="849.99"
-                    original-price="899.99"
-                    rating="4.5"
-                    deal="true">
-                </custom-product-card>
+                <!-- Add more products as needed -->
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- Student Essentials -->
-        <section class="mb-12">
-            <div class="flex justify-between items-center mb-6">
-                <h2 class="text-2xl font-bold text-gray-800">Student Essentials 🎓</h2>
-                <a href="#" class="text-blue-600 hover:text-blue-800 font-medium flex items-center">
-                    Shop all
-                    <i data-feather="arrow-right" class="ml-1 w-4 h-4"></i>
-                </a>
+    <!-- Newsletter -->
+    <section class="py-16 px-4 fade-in">
+        <div class="container mx-auto">
+            <div class="bg-gradient-to-r from-blue-500 to-purple-600 rounded-2xl p-8 md:p-12 text-white">
+                <div class="max-w-2xl mx-auto text-center">
+                    <h2 class="text-3xl font-bold mb-4">Student Deals Newsletter</h2>
+                    <p class="text-lg mb-8">Get exclusive student discounts and early access to sales</p>
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <input type="email" 
+                               placeholder="Enter your AAU email" 
+                               class="flex-grow px-6 py-4 rounded-lg text-gray-900">
+                        <button class="bg-yellow-400 text-gray-900 px-8 py-4 rounded-lg font-bold hover:bg-yellow-500">
+                            Subscribe
+                        </button>
+                    </div>
+                    <p class="text-sm mt-4 text-blue-100">By subscribing, you agree to our Privacy Policy</p>
+                </div>
             </div>
-            
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
-                <custom-product-card 
-                    image="https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?w=400"
-                    title="Logitech MX Master 3"
-                    price="89.99"
-                    rating="4.7">
-                </custom-product-card>
-                
-                <custom-product-card 
-                    image="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?w=400"
-                    title="Nintendo Switch OLED"
-                    price="349.99"
-                    rating="4.8">
-                </custom-product-card>
-                
-                <custom-product-card 
-                    image="https://images.unsplash.com/photo-1530893609608-727a05c4013d?w=400"
-                    title="GoPro Hero 11"
-                    price="399.99"
-                    rating="4.6">
-                </custom-product-card>
-                
-                <custom-product-card 
-                    image="https://images.unsplash.com/photo-1586950012036-b957f2c7cbf3?w=400"
-                    title="HP LaserJet Printer"
-                    price="189.99"
-                    rating="4.4">
-                </custom-product-card>
-                
-                <custom-product-card 
-                    image="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?w=400"
-                    title="Kindle Paperwhite"
-                    price="139.99"
-                    rating="4.5">
-                </custom-product-card>
-            </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- Top Brands -->
-        <section class="mb-12">
-            <h2 class="text-2xl font-bold text-gray-800 mb-6">Shop Top Brands</h2>
-            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6">
-                <div class="bg-white p-6 rounded-lg shadow-sm flex items-center justify-center">
-                    <span class="text-2xl font-bold text-gray-800">Apple</span>
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12 px-4">
+        <div class="container mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <h3 class="text-2xl font-bold mb-4">AAU Store</h3>
+                    <p class="text-gray-400">Campus Tech Marketplace for Addis Ababa University</p>
                 </div>
-                <div class="bg-white p-6 rounded-lg shadow-sm flex items-center justify-center">
-                    <span class="text-2xl font-bold text-gray-800">Samsung</span>
+                <div>
+                    <h4 class="font-bold mb-4">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white">Home</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Products</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Student Discount</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Campus Pickup</a></li>
+                    </ul>
                 </div>
-                <div class="bg-white p-6 rounded-lg shadow-sm flex items-center justify-center">
-                    <span class="text-2xl font-bold text-blue-600">Dell</span>
+                <div>
+                    <h4 class="font-bold mb-4">Contact</h4>
+                    <ul class="space-y-2">
+                        <li class="text-gray-400">Addis Ababa University</li>
+                        <li class="text-gray-400">Sidist Kilo Campus</li>
+                        <li class="text-gray-400">Email: store@aau.edu.et</li>
+                        <li class="text-gray-400">Phone: +251 11 123 4567</li>
+                    </ul>
                 </div>
-                <div class="bg-white p-6 rounded-lg shadow-sm flex items-center justify-center">
-                    <span class="text-2xl font-bold text-red-600">HP</span>
-                </div>
-                <div class="bg-white p-6 rounded-lg shadow-sm flex items-center justify-center">
-                    <span class="text-2xl font-bold text-black">Sony</span>
-                </div>
-                <div class="bg-white p-6 rounded-lg shadow-sm flex items-center justify-center">
-                    <span class="text-2xl font-bold text-green-600">Lenovo</span>
+                <div>
+                    <h4 class="font-bold mb-4">Follow Us</h4>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white"><i data-feather="facebook"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i data-feather="twitter"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i data-feather="instagram"></i></a>
+                    </div>
                 </div>
             </div>
-        </section>
+            <div class="border-t border-gray-800 pt-8 text-center text-gray-400">
+                <p>&copy; 2024 AAU Store. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
 
-        <!-- Newsletter & Campus Pickup -->
-        <section class="grid md:grid-cols-2 gap-8 mb-12">
-            <div class="bg-gradient-to-br from-blue-500 to-blue-700 rounded-xl shadow-md p-8 text-white">
-                <div class="flex items-center mb-4">
-                    <i data-feather="truck" class="w-8 h-8 mr-3"></i>
-                    <h2 class="text-2xl font-bold">Campus Pickup Available</h2>
-                </div>
-                <p class="mb-4">Order online and pick up from our campus location. Free pickup for AAU students!</p>
-                <button class="bg-white text-blue-600 px-6 py-2 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
-                    Find Store
-                </button>
-            </div>
-            
-            <div class="bg-white rounded-xl shadow-md p-8">
-                <h2 class="text-2xl font-bold text-gray-800 mb-4">Student Deals Newsletter</h2>
-                <p class="text-gray-600 mb-4">Get exclusive student discounts and early access to sales</p>
-                <form class="flex flex-col sm:flex-row gap-2">
-                    <input type="email" placeholder="Enter your AAU email" 
-                           class="flex-grow px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
-                    <button type="submit" class="bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors">
-                        Subscribe
-                    </button>
-                </form>
-                <p class="text-sm text-gray-500 mt-2">By subscribing, you agree to our Privacy Policy</p>
-            </div>
-        </section>
-    </main>
-    
-    <custom-footer></custom-footer>
-    
     <script>
         feather.replace();
-        // Auto-refresh feather icons
-        setInterval(() => feather.replace(), 1000);
+        
+        // Add to cart functionality
+        document.querySelectorAll('button').forEach(button => {
+            if (button.textContent.includes('Add to Cart')) {
+                button.addEventListener('click', function() {
+                    const productName = this.closest('.product-card').querySelector('h3').textContent;
+                    alert(`Added "${productName}" to cart!`);
+                    
+                    // Update cart count
+                    const cartCount = document.querySelector('.bg-red-500');
+                    if (cartCount) {
+                        const current = parseInt(cartCount.textContent);
+                        cartCount.textContent = current + 1;
+                    }
+                });
+            }
+        });
+        
+        // Newsletter subscription
+        document.querySelector('button.bg-yellow-400').addEventListener('click', function() {
+            const email = this.previousElementSibling.value;
+            if (email.includes('@')) {
+                alert('Thank you for subscribing to AAU Store newsletter!');
+                this.previousElementSibling.value = '';
+            } else {
+                alert('Please enter a valid email address');
+            }
+        });
     </script>
-    <script src="script.js"></script>
 </body>
 </html>
