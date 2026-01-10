@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AAU Store - Audio</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <script src="components/navbar.js"></script>
+    <script src="components/footer.js"></script>
+    <script src="components/product-card.js"></script>
+</head>
+<body class="bg-gray-50">
+    <custom-navbar></custom-navbar>
+    
+    <!-- Category Header -->
+    <section class="bg-gradient-to-r from-purple-600 to-pink-700 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center mb-4">
+                <a href="index.html" class="text-white/80 hover:text-white mr-2">Home</a>
+                <i data-feather="chevron-right" class="w-4 h-4 mx-2"></i>
+                <span class="font-semibold">Audio</span>
+            </div>
+            <h1 class="text-4xl md:text-5xl font-bold mb-4">Audio</h1>
+            <p class="text-xl">Premium headphones, earbuds, and speakers for immersive sound</p>
+        </div>
+    </section>
+
+    <main class="container mx-auto px-4 py-8">
+        <!-- Filter & Sort Section -->
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
+            <div class="text-gray-600">
+                <span id="product-count">16</span> products found
+            </div>
+            
+            <div class="flex flex-col sm:flex-row gap-4 w-full md:w-auto">
+                <button id="filter-toggle" class="md:hidden bg-white border border-gray-300 px-4 py-2 rounded-lg flex items-center justify-center">
+                    <i data-feather="filter" class="w-4 h-4 mr-2"></i>
+                    Filters
+                </button>
+                
+                <div class="relative">
+                    <select id="sort-select" class="bg-white border border-gray-300 px-4 py-2 rounded-lg w-full md:w-auto">
+                        <option value="featured">Sort by: Featured</option>
+                        <option value="price-low">Price: Low to High</option>
+                        <option value="price-high">Price: High to Low</option>
+                        <option value="rating">Customer Rating</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="flex flex-col md:flex-row gap-8">
+            <!-- Filters Sidebar -->
+            <aside id="filters-sidebar" class="md:w-1/4 lg:w-1/5">
+                <div class="bg-white rounded-lg shadow-sm p-6 sticky top-24">
+                    <div class="flex justify-between items-center mb-6">
+                        <h3 class="font-bold text-lg">Filters</h3>
+                        <button id="clear-filters" class="text-blue-600 text-sm">Clear all</button>
+                    </div>
+                    
+                    <!-- Category -->
+                    <div class="mb-6">
+                        <h4 class="font-semibold mb-3">Category</h4>
+                        <div class="space-y-2">
+                            <label class="flex items-center">
+                                <input type="checkbox" class="mr-2" data-filter="category" value="headphones">
+                                <span>Headphones</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox" class="mr-2" data-filter="category" value="earbuds">
+                                <span>Wireless Earbuds</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox" class="mr-2" data-filter="category" value="speakers">
+                                <span>Speakers</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox" class="mr-2" data-filter="category" value="gaming">
+                                <span>Gaming Headsets</span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <!-- Brands -->
+                    <div class="mb-6">
+                        <h4 class="font-semibold mb-3">Brands</h4>
+                        <div class="space-y-2">
+                            <label class="flex items-center">
+                                <input type="checkbox" class="mr-2" data-filter="brand" value="sony">
+                                <span>Sony</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox" class="mr-2" data-filter="brand" value="bose">
+                                <span>Bose</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox" class="mr-2" data-filter="brand" value="apple">
+                                <span>Apple</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox" class="mr-2" data-filter="brand" value="sennheiser">
+                                <span>Sennheiser</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox" class="mr-2" data-filter="brand" value="jbl">
+                                <span>JBL</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox" class="mr-2" data-filter="brand" value="beats">
+                                <span>Beats</span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <!-- Features -->
+                    <div class="mb-6">
+                        <h4 class="font-semibold mb-3">Features</h4>
+                        <div class="space-y-2">
+                            <label class="flex items-center">
+                                <input type="checkbox" class="mr-2" data-filter="feature" value="noise-cancelling">
+                                <span>Noise Cancelling</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox" class="mr-2" data-filter="feature" value="waterproof">
+                                <span>Waterproof</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox" class="mr-2" data-filter="feature" value="wireless">
+                                <span>Wireless</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox" class="mr-2" data-filter="feature" value="long-battery">
+                                <span>Long Battery (20hr+)</span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <!-- Price -->
+                    <div class="mb-6">
+                        <h4 class="font-semibold mb-3">Price Range</h4>
+                        <div class="space-y-2">
+                            <label class="flex items-center">
+                                <input type="checkbox" class="mr-2" data-filter="price" value="0-100">
+                                <span>Under $100</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox" class="mr-2" data-filter="price" value="100-300">
+                                <span>$100 - $300</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox" class="mr-2" data-filter="price" value="300+">
+                                <span>Over $300</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Products Grid -->
+            <div class="md:w-3/4 lg:w-4/5">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                    <!-- Sony WH-1000XM5 -->
+                    <custom-product-card 
+                        image="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400"
+                        title="Sony WH-1000XM5"
+                        price="349.99"
+                        original-price="399.99"
+                        rating="4.9"
+                        deal="true"
+                        review-count="423"
+                        description="Industry-leading noise cancellation, 30hr battery, multipoint connection.">
+                    </custom-product-card>
+                    
+                    <!-- Apple AirPods Pro 2 -->
+                    <custom-product-card 
+                        image="https://images.unsplash.com/photo-1572569511254-d8f925fe2cbb?w=400"
+                        title="AirPods Pro 2"
+                        price="249.99"
+                        rating="4.8"
+                        review-count="567"
+                        description="Adaptive Audio, H2 chip, MagSafe charging, Find My integration.">
+                    </custom-product-card>
+                    
+                    <!-- Bose QuietComfort 45 -->
+                    <custom-product-card 
+                        image="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400"
+                        title="Bose QuietComfort 45"
+                        price="329.99"
+                        rating="4.7"
+                        review-count="289"
+                        description="Triple noise cancelling modes, 24hr battery, comfortable for all-day use.">
+                    </custom-product-card>
+                    
+                    <!-- Sony WF-1000XM5 -->
+                    <custom-product-card 
+                        image="https://images.unsplash.com/photo-1572569511254-d8f925fe2cbb?w=400"
+                        title="Sony WF-1000XM5"
+                        price="299.99"
+                        original-price="349.99"
+                        rating="4.8"
+                        deal="true"
+                        review-count="198"
+                        description="Best noise cancelling earbuds, LDAC support, 8hr battery.">
+                    </custom-product-card>
+                    
+                    <!-- JBL Charge 5 -->
+                    <custom-product-card 
+                        image="https://images.unsplash.com/photo-1546435770-a3e426bf472b?w=400"
+                        title="JBL Charge 5"
+                        price="149.99"
+                        rating="4.6"
+                        review-count="345"
+                        description="Portable speaker, 20hr playtime, waterproof, can charge your devices.">
+                    </custom-product-card>
+                    
+                    <!-- Sennheiser HD 660S2 -->
+                    <custom-product-card 
+                        image="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400"
+                        title="Sennheiser HD 660S2"
+                        price="599.99"
+                        rating="4.9"
+                        review-count="89"
+                        description="Audiophile headphones, open-back, reference sound quality.">
+                    </custom-product-card>
+
+                    <!-- Beats Studio Pro -->
+                    <custom-product-card 
+                        image="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400"
+                        title="Beats Studio Pro"
+                        price="349.99"
+                        original-price="399.99"
+                        rating="4.5"
+                        deal="true"
+                        review-count="234"
+                        description="Apple/Android compatibility, 40hr battery, personalized spatial audio.">
+                    </custom-product-card>
+
+                    <!-- Bose SoundLink Flex -->
+                    <custom-product-card 
+                        image="https://images.unsplash.com/photo-1546435770-a3e426bf472b?w=400"
+                        title="Bose SoundLink Flex"
+                        price="149.99"
+                        rating="4.7"
+                        review-count="189"
+                        description="Waterproof, portable, positionIQ technology, 12hr battery.">
+                    </custom-product-card>
+
+                    <!-- Apple AirPods Max -->
+                    <custom-product-card 
+                        image="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400"
+                        title="AirPods Max"
+                        price="549.99"
+                        rating="4.7"
+                        review-count="156"
+                        description="Over-ear headphones, computational audio, spatial audio with dynamic head tracking.">
+                    </custom-product-card>
+
+                    <!-- Sony SRS-XB43 -->
+                    <custom-product-card 
+                        image="https://images.unsplash.com/photo-1546435770-a3e426bf472b?w=400"
+                        title="Sony SRS-XB43"
+                        price="199.99"
+                        rating="4.5"
+                        review-count="167"
+                        description="Extra bass, waterproof, party lights, 24hr battery.">
+                    </custom-product-card>
+
+                    <!-- Sennheiser Momentum 4 -->
+                    <custom-product-card 
+                        image="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400"
+                        title="Sennheiser Momentum 4"
+                        price="349.99"
+                        rating="4.6"
+                        review-count="145"
+                        description="60hr battery, adaptive noise cancellation, premium sound.">
+                    </custom-product-card>
+
+                    <!-- JBL Flip 6 -->
+                    <custom-product-card 
+                        image="https://images.unsplash.com/photo-1546435770-a3e426bf472b?w=400"
+                        title="JBL Flip 6"
+                        price="129.99"
+                        rating="4.4"
+                        review-count="278"
+                        description="Waterproof, party boost, 12hr battery, portable design.">
+                    </custom-product-card>
+
+                    <!-- SteelSeries Arctis Nova Pro -->
+                    <custom-product-card 
+                        image="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400"
+                        title="SteelSeries Arctis Nova Pro"
+                        price="349.99"
+                        rating="4.7"
+                        review-count="189"
+                        description="Gaming headset, multi-system, noise cancelling, 22hr battery.">
+                    </custom-product-card>
+
+                    <!-- Bose QuietComfort Earbuds II -->
+                    <custom-product-card 
+                        image="https://images.unsplash.com/photo-1572569511254-d8f925fe2cbb?w=400"
+                        title="Bose QuietComfort Earbuds II"
+                        price="279.99"
+                        rating="4.6"
+                        review-count="167"
+                        description="Customizable noise cancellation, 6hr battery, wireless charging.">
+                    </custom-product-card>
+
+                    <!-- Anker Soundcore Liberty 4 -->
+                    <custom-product-card 
+                        image="https://images.unsplash.com/photo-1572569511254-d8f925fe2cbb?w=400"
+                        title="Anker Soundcore Liberty 4"
+                        price="99.99"
+                        rating="4.3"
+                        review-count="312"
+                        description="Noise cancelling, heart rate monitoring, 28hr total battery.">
+                    </custom-product-card>
+
+                    <!-- Marshall Emberton II -->
+                    <custom-product-card 
+                        image="https://images.unsplash.com/photo-1546435770-a3e426bf472b?w=400"
+                        title="Marshall Emberton II"
+                        price="169.99"
+                        rating="4.5"
+                        review-count="134"
+                        description="Iconic Marshall design, 30hr battery, waterproof, Stack mode.">
+                    </custom-product-card>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Category Description -->
+        <div class="mt-12 bg-white rounded-lg shadow-sm p-8">
+            <h2 class="text-2xl font-bold mb-4">AAU Store Audio Collection</h2>
+            <div class="prose max-w-none">
+                <p>Elevate your audio experience with premium headphones, earbuds, and speakers designed for students. Perfect for studying, commuting, or relaxing between classes.</p>
+                <p>All audio products come with student-exclusive discounts and campus pickup options.</p>
+                <ul>
+                    <li>Student discounts up to 30% off</li>
+                    <li>Free extended warranty (2 years)</li>
+                    <li>Free carrying cases for headphones/earbuds</li>
+                    <li>Campus sound quality testing available</li>
+                    <li>Trade-in program for old audio gear</li>
+                    <li>Free audio enhancement software bundle</li>
+                    <li>Special financing options for students</li>
+                    <li>Free customization (engraving available)</li>
+                </ul>
+            </div>
+        </div>
+    </main>
+    
+    <custom-footer></custom-footer>
+    
+    <script>
+        feather.replace();
+        setInterval(() => feather.replace(), 1000);
+        
+        // Mobile filters toggle
+        document.getElementById('filter-toggle')?.addEventListener('click', () => {
+            const sidebar = document.getElementById('filters-sidebar');
+            sidebar.classList.toggle('hidden');
+            sidebar.classList.toggle('block');
+        });
+        
+        // Add filter functionality
+        document.querySelectorAll('input[data-filter]').forEach(checkbox => {
+            checkbox.addEventListener('change', filterProducts);
+        });
+        
+        document.getElementById('sort-select')?.addEventListener('change', filterProducts);
+        document.getElementById('clear-filters')?.addEventListener('click', clearFilters);
+        
+        function filterProducts() {
+            console.log('Filtering audio products...');
+        }
+        
+        function clearFilters() {
+            document.querySelectorAll('input[data-filter]').forEach(cb => cb.checked = false);
+            document.getElementById('sort-select').value = 'featured';
+            filterProducts();
+        }
+    </script>
+</body>
+</html>
