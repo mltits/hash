@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AAU Store - Wearables</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <script src="components/navbar.js"></script>
+    <script src="components/footer.js"></script>
+    <script src="components/product-card.js"></script>
+</head>
+<body class="bg-gray-50">
+    <custom-navbar></custom-navbar>
+    
+    <!-- Category Header -->
+    <section class="bg-gradient-to-r from-orange-600 to-red-700 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center mb-4">
+                <a href="index.html" class="text-white/80 hover:text-white mr-2">Home</a>
+                <i data-feather="chevron-right" class="w-4 h-4 mx-2"></i>
+                <span class="font-semibold">Wearables</span>
+            </div>
+            <h1 class="text-4xl md:text-5xl font-bold mb-4">Smart Watches</h1>
+            <p class="text-xl">Stay connected, track fitness, and manage your day</p>
+        </div>
+    </section>
+
+    <main class="container mx-auto px-4 py-8">
+        <!-- Filter & Sort Section -->
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
+            <div class="text-gray-600">
+                <span id="product-count">15</span> products found
+            </div>
+            
+            <div class="flex flex-col sm:flex-row gap-4 w-full md:w-auto">
+                <button id="filter-toggle" class="md:hidden bg-white border border-gray-300 px-4 py-2 rounded-lg flex items-center justify-center">
+                    <i data-feather="filter" class="w-4 h-4 mr-2"></i>
+                    Filters
+                </button>
+                
+                <div class="relative">
+                    <select id="sort-select" class="bg-white border border-gray-300 px-4 py-2 rounded-lg w-full md:w-auto">
+                        <option value="featured">Sort by: Featured</option>
+                        <option value="price-low">Price: Low to High</option>
+                        <option value="price-high">Price: High to Low</option>
+                        <option value="rating">Customer Rating</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="flex flex-col md:flex-row gap-8">
+            <!-- Filters Sidebar -->
+            <aside id="filters-sidebar" class="md:w-1/4 lg:w-1/5">
+                <div class="bg-white rounded-lg shadow-sm p-6 sticky top-24">
+                    <div class="flex justify-between items-center mb-6">
+                        <h3 class="font-bold text-lg">Filters</h3>
+                        <button id="clear-filters" class="text-blue-600 text-sm">Clear all</button>
+                    </div>
+                    
+                    <!-- Brands -->
+                    <div class="mb-6">
+                        <h4 class="font-semibold mb-3">Brands</h4>
+                        <div class="space-y-2">
+                            <label class="flex items-center">
+                                <input type="checkbox" class="mr-2" data-filter="brand" value="apple">
+                                <span>Apple Watch</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox" class="mr-2" data-filter="brand" value="samsung">
+                                <span>Samsung Galaxy Watch</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox" class="mr-2" data-filter="brand" value="garmin">
+                                <span>Garmin</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox" class="mr-2" data-filter="brand" value="fitbit">
+                                <span>Fitbit</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox" class="mr-2" data-filter="brand" value="huawei">
+                                <span>Huawei</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox" class="mr-2" data-filter="brand" value="amazfit">
+                                <span>Amazfit</span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <!-- Type -->
+                    <div class="mb-6">
+                        <h4 class="font-semibold mb-3">Type</h4>
+                        <div class="space-y-2">
+                            <label class="flex items-center">
+                                <input type="checkbox" class="mr-2" data-filter="type" value="smartwatch">
+                                <span>Smart Watch</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox" class="mr-2" data-filter="type" value="fitness">
+                                <span>Fitness Tracker</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox" class="mr-2" data-filter="type" value="hybrid">
+                                <span>Hybrid Watch</span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <!-- Features -->
+                    <div class="mb-6">
+                        <h4 class="font-semibold mb-3">Features</h4>
+                        <div class="space-y-2">
+                            <label class="flex items-center">
+                                <input type="checkbox" class="mr-2" data-filter="feature" value="ecg">
+                                <span>ECG / Heart Monitor</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox" class="mr-2" data-filter="feature" value="gps">
+                                <span>GPS Built-in</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox" class="mr-2" data-filter="feature" value="waterproof">
+                                <span>Waterproof (5ATM+)</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox" class="mr-2" data-filter="feature" value="cellular">
+                                <span>Cellular/LTE</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox" class="mr-2" data-filter="feature" value="long-battery">
+                                <span>Long Battery (7+ days)</span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <!-- Price -->
+                    <div class="mb-6">
+                        <h4 class="font-semibold mb-3">Price Range</h4>
+                        <div class="space-y-2">
+                            <label class="flex items-center">
+                                <input type="checkbox" class="mr-2" data-filter="price" value="0-200">
+                                <span>Under $200</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox" class="mr-2" data-filter="price" value="200-400">
+                                <span>$200 - $400</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox" class="mr-2" data-filter="price" value="400-600">
+                                <span>$400 - $600</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox" class="mr-2" data-filter="price" value="600+">
+                                <span>Over $600</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Products Grid -->
+            <div class="md:w-3/4 lg:w-4/5">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                    <!-- Apple Watch Ultra 2 -->
+                    <custom-product-card 
+                        image="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400"
+                        title="Apple Watch Ultra 2"
+                        price="799.99"
+                        rating="4.8"
+                        review-count="289"
+                        description="Rugged design, 36hr battery, dual-frequency GPS, depth gauge.">
+                    </custom-product-card>
+                    
+                    <!-- Apple Watch Series 9 -->
+                    <custom-product-card 
+                        image="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400"
+                        title="Apple Watch Series 9"
+                        price="399.99"
+                        original-price="429.99"
+                        rating="4.7"
+                        deal="true"
+                        review-count="456"
+                        description="Double tap gesture, S9 chip, brighter display, 18hr battery.">
+                    </custom-product-card>
+                    
+                    <!-- Samsung Galaxy Watch 6 Classic -->
+                    <custom-product-card 
+                        image="https://images.unsplash.com/photo-1579586337278-3fec11928575?w=400"
+                        title="Galaxy Watch 6 Classic"
+                        price="369.99"
+                        rating="4.6"
+                        review-count="234"
+                        description="Rotating bezel, 40hr battery, body composition, sapphire crystal.">
+                    </custom-product-card>
+                    
+                    <!-- Garmin Forerunner 965 -->
+                    <custom-product-card 
+                        image="https://images.unsplash.com/photo-1546868871-7041f2a55e12?w=400"
+                        title="Garmin Forerunner 965"
+                        price="599.99"
+                        rating="4.8"
+                        review-count="167"
+                        description="AMOLED display, 23-day battery, advanced running metrics, offline maps.">
+                    </custom-product-card>
+                    
+                    <!-- Fitbit Charge 6 -->
+                    <custom-product-card 
+                        image="https://images.unsplash.com/photo-1579586337278-3fec11928575?w=400"
+                        title="Fitbit Charge 6"
+                        price="159.99"
+                        rating="4.4"
+                        review-count="345"
+                        description="7-day battery, Google apps, ECG, built-in GPS, heart rate zone training.">
+                    </custom-product-card>
+                    
+                    <!-- Apple Watch SE 2 -->
+                    <custom-product-card 
+                        image="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400"
+                        title="Apple Watch SE 2"
+                        price="249.99"
+                        original-price="279.99"
+                        rating="4.5"
+                        deal="true"
+                        review-count="567"
+                        description="Affordable Apple Watch, crash detection, 18hr battery, fitness tracking.">
+                    </custom-product-card>
+
+                    <!-- Samsung Galaxy Watch 5 Pro -->
+                    <custom-product-card 
+                        image="https://images.unsplash.com/photo-1579586337278-3fec11928575?w=400"
+                        title="Galaxy Watch 5 Pro"
+                        price="449.99"
+                        rating="4.6"
+                        review-count="189"
+                        description="80hr battery, sapphire glass, route workout, GPX support.">
+                    </custom-product-card>
+
+                    <!-- Garmin Venu 3 -->
+                    <custom-product-card 
+                        image="https://images.unsplash.com/photo-1546868871-7041f2a55e12?w=400"
+                        title="Garmin Venu 3"
+                        price="449.99"
+                        rating="4.7"
+                        review-count="134"
+                        description="AMOLED, 14-day battery, sleep coaching, nap detection, animated workouts.">
+                    </custom-product-card>
+
+                    <!-- Fitbit Sense 2 -->
+                    <custom-product-card 
+                        image="https://images.unsplash.com/photo-1579586337278-3fec11928575?w=400"
+                        title="Fitbit Sense 2"
+                        price="299.99"
+                        rating="4.3"
+                        review-count="178"
+                        description="Stress management, ECG, EDA scan, 6+ day battery, Google integration.">
+                    </custom-product-card>
+
+                    <!-- Huawei Watch GT 4 -->
+                    <custom-product-card 
+                        image="https://images.unsplash.com/photo-1546868871-7041f2a55e12?w=400"
+                        title="Huawei Watch GT 4"
+                        price="249.99"
+                        rating="4.5"
+                        review-count="156"
+                        description="14-day battery, TruSeen 5.5+, 100+ sports modes, stylish design.">
+                    </custom-product-card>
+
+                    <!-- Amazfit GTR 4 -->
+                    <custom-product-card 
+                        image="https://images.unsplash.com/photo-1579586337278-3fec11928575?w=400"
+                        title="Amazfit GTR 4"
+                        price="199.99"
+                        rating="4.4"
+                        review-count="189"
+                        description="14-day battery, dual-band GPS, 150+ sports modes, Zepp OS 2.0.">
+                    </custom-product-card>
+
+                    <!-- Garmin Instinct 2 Solar -->
+                    <custom-product-card 
+                        image="https://images.unsplash.com/photo-1546868871-7041f2a55e12?w=400"
+                        title="Garmin Instinct 2 Solar"
+                        price="449.99"
+                        rating="4.7"
+                        review-count="123"
+                        description="Unlimited battery (with solar), military standard, ABC sensors, GPS.">
+                    </custom-product-card>
+
+                    <!-- Samsung Galaxy Watch 4 -->
+                    <custom-product-card 
+                        image="https://images.unsplash.com/photo-1579586337278-3fec11928575?w=400"
+                        title="Galaxy Watch 4"
+                        price="199.99"
+                        rating="4.3"
+                        review-count="278"
+                        description="BIA sensor, Wear OS 3, 40hr battery, great value for Android users.">
+                    </custom-product-card>
+
+                    <!-- Apple Watch Series 8 -->
+                    <custom-product-card 
+                        image="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400"
+                        title="Apple Watch Series 8"
+                        price="329.99"
+                        original-price="399.99"
+                        rating="4.6"
+                        deal="true"
+                        review-count="312"
+                        description="Temperature sensing, crash detection, ovulation estimates, 18hr battery.">
+                    </custom-product-card>
+
+                    <!-- Fitbit Versa 4 -->
+                    <custom-product-card 
+                        image="https://images.unsplash.com/photo-1579586337278-3fec11928575?w=400"
+                        title="Fitbit Versa 4"
+                        price="229.99"
+                        rating="4.2"
+                        review-count="167"
+                        description="6+ day battery, built-in GPS, 40+ exercise modes, Google Wallet.">
+                    </custom-product-card>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Category Description -->
+        <div class="mt-12 bg-white rounded-lg shadow-sm p-8">
+            <h2 class="text-2xl font-bold mb-4">AAU Store Wearables Collection</h2>
+            <div class="prose max-w-none">
+                <p>Stay on top of your health, fitness, and schedule with smart watches from leading brands. Perfect for active students who want to balance academics and wellness.</p>
+                <p>All wearables come with student discounts and campus health app integration.</p>
+                <ul>
+                    <li>Student discounts up to 25% off</li>
+                    <li>Free 2-year extended warranty</li>
+                    <li>Free extra band (choose from colors)</li>
+                    <li>Integration with campus fitness centers</li>
+                    <li>Health data privacy guarantee</li>
+                    <li>Free screen protector installation</li>
+                    <li>Trade-in program for old watches</li>
+                    <li>Special student health monitoring features</li>
+                    <li>Free fitness class passes with purchase</li>
+                </ul>
+            </div>
+        </div>
+    </main>
+    
+    <custom-footer></custom-footer>
+    
+    <script>
+        feather.replace();
+        setInterval(() => feather.replace(), 1000);
+        
+        // Mobile filters toggle
+        document.getElementById('filter-toggle')?.addEventListener('click', () => {
+            const sidebar = document.getElementById('filters-sidebar');
+            sidebar.classList.toggle('hidden');
+            sidebar.classList.toggle('block');
+        });
+        
+        // Add filter functionality
+        document.querySelectorAll('input[data-filter]').forEach(checkbox => {
+            checkbox.addEventListener('change', filterProducts);
+        });
+        
+        document.getElementById('sort-select')?.addEventListener('change', filterProducts);
+        document.getElementById('clear-filters')?.addEventListener('click', clearFilters);
+        
+        function filterProducts() {
+            console.log('Filtering wearables...');
+        }
+        
+        function clearFilters() {
+            document.querySelectorAll('input[data-filter]').forEach(cb => cb.checked = false);
+            document.getElementById('sort-select').value = 'featured';
+            filterProducts();
+        }
+    </script>
+</body>
+</html>

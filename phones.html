@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AAU Store - Smartphones</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <script src="components/navbar.js"></script>
+    <script src="components/footer.js"></script>
+    <script src="components/product-card.js"></script>
+</head>
+<body class="bg-gray-50">
+    <custom-navbar></custom-navbar>
+    
+    <!-- Category Header -->
+    <section class="bg-gradient-to-r from-blue-600 to-purple-700 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center mb-4">
+                <a href="index.html" class="text-white/80 hover:text-white mr-2">Home</a>
+                <i data-feather="chevron-right" class="w-4 h-4 mx-2"></i>
+                <span class="font-semibold">Smartphones</span>
+            </div>
+            <h1 class="text-4xl md:text-5xl font-bold mb-4">Smartphones</h1>
+            <p class="text-xl">Latest smartphones from top brands with student discounts</p>
+        </div>
+    </section>
+
+    <main class="container mx-auto px-4 py-8">
+        <!-- Filter & Sort Section -->
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
+            <div class="text-gray-600">
+                <span id="product-count">20</span> products found
+            </div>
+            
+            <div class="flex flex-col sm:flex-row gap-4 w-full md:w-auto">
+                <button id="filter-toggle" class="md:hidden bg-white border border-gray-300 px-4 py-2 rounded-lg flex items-center justify-center">
+                    <i data-feather="filter" class="w-4 h-4 mr-2"></i>
+                    Filters
+                </button>
+                
+                <div class="relative">
+                    <select id="sort-select" class="bg-white border border-gray-300 px-4 py-2 rounded-lg w-full md:w-auto">
+                        <option value="featured">Sort by: Featured</option>
+                        <option value="price-low">Price: Low to High</option>
+                        <option value="price-high">Price: High to Low</option>
+                        <option value="rating">Customer Rating</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="flex flex-col md:flex-row gap-8">
+            <!-- Filters Sidebar -->
+            <aside id="filters-sidebar" class="md:w-1/4 lg:w-1/5">
+                <div class="bg-white rounded-lg shadow-sm p-6 sticky top-24">
+                    <div class="flex justify-between items-center mb-6">
+                        <h3 class="font-bold text-lg">Filters</h3>
+                        <button id="clear-filters" class="text-blue-600 text-sm">Clear all</button>
+                    </div>
+                    
+                    <!-- Brands -->
+                    <div class="mb-6">
+                        <h4 class="font-semibold mb-3">Brands</h4>
+                        <div class="space-y-2">
+                            <label class="flex items-center">
+                                <input type="checkbox" class="mr-2" data-filter="brand" value="apple">
+                                <span>Apple</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox" class="mr-2" data-filter="brand" value="samsung">
+                                <span>Samsung</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox" class="mr-2" data-filter="brand" value="google">
+                                <span>Google</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox" class="mr-2" data-filter="brand" value="oneplus">
+                                <span>OnePlus</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox" class="mr-2" data-filter="brand" value="xiaomi">
+                                <span>Xiaomi</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox" class="mr-2" data-filter="brand" value="nothing">
+                                <span>Nothing</span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <!-- Price -->
+                    <div class="mb-6">
+                        <h4 class="font-semibold mb-3">Price Range</h4>
+                        <div class="space-y-2">
+                            <label class="flex items-center">
+                                <input type="checkbox" class="mr-2" data-filter="price" value="0-300">
+                                <span>Under $300</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox" class="mr-2" data-filter="price" value="300-600">
+                                <span>$300 - $600</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox" class="mr-2" data-filter="price" value="600-1000">
+                                <span>$600 - $1000</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox" class="mr-2" data-filter="price" value="1000+">
+                                <span>Over $1000</span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <!-- Rating -->
+                    <div class="mb-6">
+                        <h4 class="font-semibold mb-3">Rating</h4>
+                        <div class="space-y-2">
+                            <label class="flex items-center">
+                                <input type="checkbox" class="mr-2" data-filter="rating" value="4+">
+                                <span class="flex items-center">
+                                    <i data-feather="star" class="w-4 h-4 text-yellow-400 fill-current mr-1"></i>
+                                    4+ & above
+                                </span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox" class="mr-2" data-filter="rating" value="4.5+">
+                                <span class="flex items-center">
+                                    <i data-feather="star" class="w-4 h-4 text-yellow-400 fill-current mr-1"></i>
+                                    4.5+ & above
+                                </span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <!-- Deals -->
+                    <div>
+                        <label class="flex items-center">
+                            <input type="checkbox" class="mr-2" data-filter="deal" value="true">
+                            <span class="text-red-600 font-medium">On Sale</span>
+                        </label>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Products Grid -->
+            <div class="md:w-3/4 lg:w-4/5">
+                <div id="products-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                    <!-- iPhone 15 Pro Max -->
+                    <custom-product-card 
+                        image="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=400"
+                        title="iPhone 15 Pro Max"
+                        price="1199.99"
+                        original-price="1299.99"
+                        rating="4.8"
+                        deal="true"
+                        review-count="245">
+                    </custom-product-card>
+                    
+                    <!-- Samsung Galaxy S23 Ultra -->
+                    <custom-product-card 
+                        image="https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?w=400"
+                        title="Samsung Galaxy S23 Ultra"
+                        price="1099.99"
+                        rating="4.7"
+                        review-count="189">
+                    </custom-product-card>
+                    
+                    <!-- Google Pixel 8 Pro -->
+                    <custom-product-card 
+                        image="https://images.unsplash.com/photo-1598327105666-5b89351aff97?w=400"
+                        title="Google Pixel 8 Pro"
+                        price="899.99"
+                        original-price="999.99"
+                        rating="4.6"
+                        deal="true"
+                        review-count="156">
+                    </custom-product-card>
+                    
+                    <!-- OnePlus 11 -->
+                    <custom-product-card 
+                        image="https://images.unsplash.com/photo-1592750475338-74b7b21085ab?w=400"
+                        title="OnePlus 11"
+                        price="699.99"
+                        rating="4.5"
+                        review-count="98">
+                    </custom-product-card>
+                    
+                    <!-- iPhone 14 -->
+                    <custom-product-card 
+                        image="https://images.unsplash.com/photo-1556656793-08538906a9f8?w=400"
+                        title="iPhone 14"
+                        price="799.99"
+                        original-price="899.99"
+                        rating="4.4"
+                        deal="true"
+                        review-count="312">
+                    </custom-product-card>
+                    
+                    <!-- Samsung Galaxy Z Flip 5 -->
+                    <custom-product-card 
+                        image="https://images.unsplash.com/photo-1621939514649-280e2ee25f61?w=400"
+                        title="Samsung Galaxy Z Flip 5"
+                        price="999.99"
+                        rating="4.3"
+                        review-count="134">
+                    </custom-product-card>
+
+                    <!-- Google Pixel 7a -->
+                    <custom-product-card 
+                        image="https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?w=400"
+                        title="Google Pixel 7a"
+                        price="449.99"
+                        original-price="499.99"
+                        rating="4.6"
+                        deal="true"
+                        review-count="287">
+                    </custom-product-card>
+
+                    <!-- Samsung Galaxy A54 -->
+                    <custom-product-card 
+                        image="https://images.unsplash.com/photo-1556656793-08538906a9f8?w=400"
+                        title="Samsung Galaxy A54"
+                        price="449.99"
+                        rating="4.2"
+                        review-count="176">
+                    </custom-product-card>
+
+                    <!-- iPhone SE (3rd Gen) -->
+                    <custom-product-card 
+                        image="https://images.unsplash.com/photo-1592750475338-74b7b21085ab?w=400"
+                        title="iPhone SE (3rd Gen)"
+                        price="429.99"
+                        original-price="479.99"
+                        rating="4.0"
+                        deal="true"
+                        review-count="213">
+                    </custom-product-card>
+
+                    <!-- OnePlus Nord 3 -->
+                    <custom-product-card 
+                        image="https://images.unsplash.com/photo-1598327105666-5b89351aff97?w=400"
+                        title="OnePlus Nord 3"
+                        price="549.99"
+                        rating="4.4"
+                        review-count="89">
+                    </custom-product-card>
+
+                    <!-- Xiaomi 13 Pro -->
+                    <custom-product-card 
+                        image="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=400"
+                        title="Xiaomi 13 Pro"
+                        price="899.99"
+                        original-price="999.99"
+                        rating="4.5"
+                        deal="true"
+                        review-count="124">
+                    </custom-product-card>
+
+                    <!-- Samsung Galaxy S23 -->
+                    <custom-product-card 
+                        image="https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?w=400"
+                        title="Samsung Galaxy S23"
+                        price="799.99"
+                        rating="4.5"
+                        review-count="156">
+                    </custom-product-card>
+
+                    <!-- Google Pixel 6a -->
+                    <custom-product-card 
+                        image="https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?w=400"
+                        title="Google Pixel 6a"
+                        price="349.99"
+                        rating="4.3"
+                        review-count="267">
+                    </custom-product-card>
+
+                    <!-- Nothing Phone 2 -->
+                    <custom-product-card 
+                        image="https://images.unsplash.com/photo-1621939514649-280e2ee25f61?w=400"
+                        title="Nothing Phone 2"
+                        price="599.99"
+                        rating="4.4"
+                        review-count="178">
+                    </custom-product-card>
+
+                    <!-- iPhone 15 -->
+                    <custom-product-card 
+                        image="https://images.unsplash.com/photo-1556656793-08538906a9f8?w=400"
+                        title="iPhone 15"
+                        price="899.99"
+                        original-price="999.99"
+                        rating="4.7"
+                        deal="true"
+                        review-count="189">
+                    </custom-product-card>
+
+                    <!-- Samsung Galaxy Z Fold 5 -->
+                    <custom-product-card 
+                        image="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=400"
+                        title="Samsung Galaxy Z Fold 5"
+                        price="1799.99"
+                        rating="4.6"
+                        review-count="98">
+                    </custom-product-card>
+
+                    <!-- Xiaomi Redmi Note 12 Pro -->
+                    <custom-product-card 
+                        image="https://images.unsplash.com/photo-1592750475338-74b7b21085ab?w=400"
+                        title="Xiaomi Redmi Note 12 Pro"
+                        price="299.99"
+                        rating="4.1"
+                        review-count="312">
+                    </custom-product-card>
+
+                    <!-- OnePlus Nord CE 3 -->
+                    <custom-product-card 
+                        image="https://images.unsplash.com/photo-1598327105666-5b89351aff97?w=400"
+                        title="OnePlus Nord CE 3"
+                        price="329.99"
+                        rating="4.0"
+                        review-count="145">
+                    </custom-product-card>
+
+                    <!-- Google Pixel Fold -->
+                    <custom-product-card 
+                        image="https://images.unsplash.com/photo-1621939514649-280e2ee25f61?w=400"
+                        title="Google Pixel Fold"
+                        price="1799.99"
+                        rating="4.4"
+                        review-count="67">
+                    </custom-product-card>
+
+                    <!-- Samsung Galaxy A34 -->
+                    <custom-product-card 
+                        image="https://images.unsplash.com/photo-1556656793-08538906a9f8?w=400"
+                        title="Samsung Galaxy A34"
+                        price="349.99"
+                        rating="4.2"
+                        review-count="198">
+                    </custom-product-card>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Category Description -->
+        <div class="mt-12 bg-white rounded-lg shadow-sm p-8">
+            <h2 class="text-2xl font-bold mb-4">AAU Store Smartphone Collection</h2>
+            <div class="prose max-w-none">
+                <p>Discover the latest smartphones from Apple, Samsung, Google, and more. All devices come with student-exclusive discounts, campus pickup options, and free accessories for AAU students.</p>
+                <p>Our smartphones are tested and certified for academic use, with extended battery life and education-focused features.</p>
+                <ul>
+                    <li>Student discounts up to 20% off</li>
+                    <li>Free campus pickup available</li>
+                    <li>1-year extended warranty for students</li>
+                    <li>Free screen protector and case</li>
+                    <li>Trade-in options for old devices</li>
+                    <li>Special financing for students</li>
+                    <li>Free software bundle (Office 365, Adobe Creative Cloud trial)</li>
+                </ul>
+            </div>
+        </div>
+    </main>
+    
+    <custom-footer></custom-footer>
+    
+    <script>
+        feather.replace();
+        setInterval(() => feather.replace(), 1000);
+        
+        // Mobile filters toggle
+        const filterToggle = document.getElementById('filter-toggle');
+        const filtersSidebar = document.getElementById('filters-sidebar');
+        
+        if (filterToggle && filtersSidebar) {
+            // Hide filters sidebar on mobile by default
+            if (window.innerWidth < 768) {
+                filtersSidebar.classList.add('hidden');
+            }
+            
+            filterToggle.addEventListener('click', () => {
+                filtersSidebar.classList.toggle('hidden');
+                filtersSidebar.classList.toggle('block');
+            });
+        }
+        
+        // Filter functionality
+        function filterProducts() {
+            console.log('Filtering products...');
+            // Simple filter logic
+            const checkboxes = document.querySelectorAll('input[data-filter]:checked');
+            const sortSelect = document.getElementById('sort-select');
+            
+            const activeFilters = {
+                brands: [],
+                priceRanges: [],
+                ratings: [],
+                deals: []
+            };
+            
+            checkboxes.forEach(checkbox => {
+                const filterType = checkbox.dataset.filter;
+                const value = checkbox.value;
+                
+                switch(filterType) {
+                    case 'brand':
+                        activeFilters.brands.push(value);
+                        break;
+                    case 'price':
+                        activeFilters.priceRanges.push(value);
+                        break;
+                    case 'rating':
+                        activeFilters.ratings.push(value);
+                        break;
+                    case 'deal':
+                        activeFilters.deals.push(value);
+                        break;
+                }
+            });
+            
+            console.log('Active filters:', activeFilters);
+            console.log('Sort by:', sortSelect?.value);
+            
+            // Show product count
+            const productCount = document.getElementById('product-count');
+            if (productCount) {
+                // Count visible product cards
+                const productCards = document.querySelectorAll('custom-product-card');
+                let visibleCount = 0;
+                
+                productCards.forEach(card => {
+                    // Simple visibility check (in real implementation, you'd filter products)
+                    const title = card.getAttribute('title') || '';
+                    const price = parseFloat(card.getAttribute('price') || 0);
+                    const rating = parseFloat(card.getAttribute('rating') || 0);
+                    const deal = card.getAttribute('deal') === 'true';
+                    
+                    // Check if product matches filters
+                    let visible = true;
+                    
+                    // Check brand filter
+                    if (activeFilters.brands.length > 0) {
+                        const brandMatch = activeFilters.brands.some(brand => 
+                            title.toLowerCase().includes(brand.toLowerCase())
+                        );
+                        visible = visible && brandMatch;
+                    }
+                    
+                    // Check price filter
+                    if (activeFilters.priceRanges.length > 0 && visible) {
+                        const priceMatch = activeFilters.priceRanges.some(range => {
+                            const [min, max] = range.split('-').map(val => 
+                                val.endsWith('+') ? parseFloat(val) : parseFloat(val)
+                            );
+                            if (range.endsWith('+')) {
+                                return price >= min;
+                            }
+                            return price >= min && price <= max;
+                        });
+                        visible = visible && priceMatch;
+                    }
+                    
+                    // Check rating filter
+                    if (activeFilters.ratings.length > 0 && visible) {
+                        const ratingMatch = activeFilters.ratings.some(r => {
+                            const minRating = parseFloat(r);
+                            return rating >= minRating;
+                        });
+                        visible = visible && ratingMatch;
+                    }
+                    
+                    // Check deal filter
+                    if (activeFilters.deals.length > 0 && visible) {
+                        visible = visible && deal;
+                    }
+                    
+                    // Show/hide card based on filters
+                    card.style.display = visible ? 'block' : 'none';
+                    if (visible) visibleCount++;
+                });
+                
+                productCount.textContent = visibleCount;
+            }
+        }
+        
+        // Add filter event listeners
+        document.querySelectorAll('input[data-filter]').forEach(checkbox => {
+            checkbox.addEventListener('change', filterProducts);
+        });
+        
+        document.getElementById('sort-select')?.addEventListener('change', filterProducts);
+        
+        document.getElementById('clear-filters')?.addEventListener('click', () => {
+            document.querySelectorAll('input[data-filter]').forEach(cb => cb.checked = false);
+            document.getElementById('sort-select').value = 'featured';
+            filterProducts();
+        });
+        
+        // Initialize filters
+        filterProducts();
+        
+        // Update product count on load
+        window.addEventListener('load', () => {
+            const productCards = document.querySelectorAll('custom-product-card');
+            const productCount = document.getElementById('product-count');
+            if (productCount) {
+                productCount.textContent = productCards.length;
+            }
+        });
+        
+        // Responsive filters
+        window.addEventListener('resize', () => {
+            if (window.innerWidth >= 768 && filtersSidebar) {
+                filtersSidebar.classList.remove('hidden');
+                filtersSidebar.classList.add('block');
+            } else if (window.innerWidth < 768 && filtersSidebar) {
+                filtersSidebar.classList.add('hidden');
+                filtersSidebar.classList.remove('block');
+            }
+        });
+    </script>
+</body>
+</html>
